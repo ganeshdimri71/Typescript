@@ -1,34 +1,38 @@
-import { Invoice } from './classes/invoice.js';
-import { ListTemplate } from './classes/ListTemplate.js';
-import { Payment } from './classes/payments.js';
-let docOne;
-let docTwo;
-docOne = new Invoice('Ganesh', 'web work', 250);
-docTwo = new Payment('Sanjay', 'Plummber work', 200);
-let docs = [];
-docs.push(docOne);
-docs.push(docTwo);
-console.log(docs);
-const form = document.querySelector('form');
-const formOne = document.querySelector('.new-item-form');
-const formTwo = document.querySelector('.new-item-form');
-console.log(formTwo.children);
-// inputs
-const type = document.querySelector('#type');
-const typeTwo = document.querySelector('#tofrom');
-const typeThree = document.querySelector('#details');
-const typeFour = document.querySelector('#amount');
-// list template instance
-const ul = document.querySelector('ul');
-const list = new ListTemplate(ul);
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let doc;
-    if (type.value === 'invoice') {
-        doc = new Invoice(typeTwo.value, typeThree.value, typeFour.valueAsNumber);
-    }
-    else {
-        doc = new Payment(typeTwo.value, typeThree.value, typeFour.valueAsNumber);
-    }
-    list.render(doc, type.value, 'end');
-});
+"use strict";
+// Generics
+const addUID = (obj) => {
+    let uid = Math.floor(Math.random() * 100);
+    return Object.assign(Object.assign({}, obj), { uid });
+};
+let docOne = addUID({ name: 'Ganesh', age: 40 });
+console.log(docOne);
+// console.log(docOne.name)
+// src/app.ts:11:20 - error TS2339: Property 'name' does not exist on type '{ uid: number; }'.
+// 11 console.log(docOne.name)
+const addUIDOne = (obj) => {
+    let uid = Math.floor(Math.random() * 100);
+    return Object.assign(Object.assign({}, obj), { uid });
+};
+let docTwo = addUIDOne({ name: 'Ganesh', age: 40 });
+console.log(docTwo.name);
+const addUIDTwo = (obj) => {
+    let uid = Math.floor(Math.random() * 100);
+    return Object.assign(Object.assign({}, obj), { uid });
+};
+let docThree = addUIDTwo({ name: 'Ganesh', age: 40 });
+console.log(docThree.name);
+const docFour = {
+    uid: 1,
+    resourceName: 'person',
+    data: 'Ganesh'
+};
+const docFive = {
+    uid: 1,
+    resourceName: 'person',
+    data: { name: 'Ganesh' }
+};
+const docSix = {
+    uid: 1,
+    resourceName: 'shoppingList',
+    data: ['test', 'bread', 'milk']
+};

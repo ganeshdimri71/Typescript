@@ -1,44 +1,65 @@
-import { Invoice } from './classes/invoice.js'
-import { ListTemplate } from './classes/ListTemplate.js';
-import { Payment } from './classes/payments.js'
-import {HasFormatter} from './interfaces/HasFormatter.js'
+// Generics
 
-let docOne: HasFormatter;
-let docTwo: HasFormatter;
+const addUID = (obj: object) => {
+    let uid = Math.floor(Math.random() * 100);
+    return { ...obj, uid };
+}
 
-docOne = new Invoice('Ganesh', 'web work', 250)
-docTwo = new Payment('Sanjay', 'Plummber work', 200)
+let docOne = addUID({name: 'Ganesh', age: 40})
 
-let docs: HasFormatter[] = []
-docs.push(docOne)
-docs.push(docTwo)
+console.log(docOne)
+// console.log(docOne.name)
+// src/app.ts:11:20 - error TS2339: Property 'name' does not exist on type '{ uid: number; }'.
+// 11 console.log(docOne.name)
 
-console.log(docs)
+const addUIDOne = <T>(obj: T) => {
+    let uid = Math.floor(Math.random() * 100);
+    return { ...obj, uid };
+}
 
-const form = document.querySelector('form')!;
-const formOne = document.querySelector('.new-item-form')!;
-const formTwo = document.querySelector('.new-item-form') as HTMLFormElement;
-console.log(formTwo.children);
+let docTwo = addUIDOne({name: 'Ganesh', age: 40})
 
-// inputs
-const type = document.querySelector('#type') as HTMLSelectElement
-const typeTwo = document.querySelector('#tofrom') as HTMLInputElement
-const typeThree = document.querySelector('#details') as HTMLInputElement
-const typeFour = document.querySelector('#amount') as HTMLInputElement
+console.log(docTwo.name)
 
-// list template instance
-const ul = document.querySelector('ul')!;
-const list = new ListTemplate(ul);
-form.addEventListener('submit', (e: Event) => {
-    e.preventDefault()
+const addUIDTwo = <T extends {name: string}>(obj: T) => {
+    let uid = Math.floor(Math.random() * 100);
+    return { ...obj, uid };
+}
 
-    let doc: HasFormatter;
-    if (type.value === 'invoice') {
-        doc = new Invoice(typeTwo.value, typeThree.value,  typeFour.valueAsNumber)
-    } else {
-        doc = new Payment(typeTwo.value, typeThree.value,  typeFour.valueAsNumber)
-    }
+let docThree = addUIDTwo({name: 'Ganesh', age: 40})
 
-    list.render(doc, type.value, 'end')
+console.log(docThree.name)
+
+
+// with interfaces
+interface Resource<T>{
+    uid: number;
+    resourceName: string;
+    data: T; 
+}
+
+const docFour: Resource<string> = {
+    uid: 1,
+    resourceName: 'person',
+    data:  'Ganesh'
     
-})
+}
+
+interface ResourceOne<T>{
+    uid: number;
+    resourceName: string;
+    data: T; 
+}
+
+const docFive: ResourceOne<object> = {
+    uid: 1,
+    resourceName: 'person',
+    data: {name: 'Ganesh'}
+    
+}
+
+const docSix: Resource<string[]>  = {
+      uid: 1,
+    resourceName: 'shoppingList',
+    data: ['test', 'bread', 'milk']
+}
