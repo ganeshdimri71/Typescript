@@ -1,59 +1,61 @@
+// explicit types
+var character;
+var age;
+var isLoggedIn;
+// age = 'Ganesh'
+// sandbox.ts:6:1 - error TS2322: Type 'string' is not assignable to type 'number'.
+// 6 age = 'Ganesh'
+age = 30;
+// isLoggedIn = 25;
+// sandbox.ts:13:1 - error TS2322: Type 'number' is not assignable to type 'boolean'.
+// 13 isLoggedIn = 25;
+isLoggedIn = true;
 //arrays
-var names = ['luigi', 'mario', 'yoshi'];
-names.push('toad');
-// names.push(3)
-// Argument of type 'number' is not assignable to parameter of type 'string'.
-// 5 names.push(3)
-var numbers = [10, 20, 30, 40];
-numbers.push(25);
-// numbers.push('shaun')
-// sandbox.ts:13:14 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.
-// numbers[1] = 'shaun'
-// sandbox.ts:17:1 - error TS2322: Type 'string' is not assignable to type 'number'.
-// 17 numbers[1] = 'shaun'
-var mixed = ['ken', 4, 'chun-li', 8, 9, true];
-mixed.push('ryu');
-mixed.push(10);
-mixed[0] = 3;
-//Objects
-var ninja = {
-    name: 'mario',
-    belt: 'black',
-    age: 30
-};
-ninja.age = 40;
-ninja.name = 'ryu';
-// ninja.age = '30'
-// sandbox.ts:38:1 - error TS2322: Type 'string' is not assignable to type 'number'.
-// 38 ninja.age = '30'
-// ninja.skills = ['fighting']
-// sandbox.ts:43:7 - error TS2339: Property 'skills' does not exist on
-// type '{ name: string; belt: string; age: number; }'.
-// 43 ninja.skills = ['fighting']
-// ninja = {
-//     name: 'yoshi',
-//     belt: 'orange',
-// }
-// sandbox.ts:49:1 - error TS2741: Property 'age' is missing in type '{ name: string; belt: string; }' but required in type '{ name: string; belt: string; age: number; }'.
-// 49 ninja = {
-//    ~~~~~
-//   sandbox.ts:33:5
-//     33     age:30
-//            ~~~~~~
-//     'age' is declared here.
-ninja = {
-    name: 'yoshi',
-    belt: 'orange',
-    age: 40
-};
-// ninja = {
-//     name: 'yoshi',
-//     belt: 'orange',
-//     age: 40,
-//     skills:[]
-// }
-// sandbox.ts:73:5 - error TS2322: Type '{ name: string; belt: string; 
-// age: number; skills: undefined[]; }' is not assignable to type '{ name: string; belt: string; age: number; }'.
-//   Object literal may only specify known properties, and 'skills' does not exist in type '{ name: string; belt: string; age: number; }'. 
-// 73     skills:[]
-//        ~~~~~~~~~
+var ninjas;
+// ninjas = [10, 23]
+// sandbox.ts:23:14 - error TS2322: Type 'number' is not assignable to
+// type 'string'.
+// 23 ninjas = [10,23]
+//                 ~~
+// ninjas = ['Ganesh','Sanjay']
+// ninjas.push('shaun')
+// sandbox.js:21 Uncaught TypeError: Cannot read properties of undefined (reading 'push')
+//     at sandbox.js:21:8
+var ninjasOne = [];
+ninjasOne.push('shaun');
+// union types
+var mixed = [];
+mixed.push('hello');
+mixed.push(20);
+// mixed.push(false)
+// sandbox.ts:44:12 - error TS2345: Argument of type 'boolean' is not assignable to parameter of type 'string | number'.
+// 44 mixed.push(false)
+var mixedOne = [];
+mixedOne.push('hello');
+mixedOne.push(20);
+mixedOne.push(false);
+console.log(mixedOne);
+var uid;
+uid = '123';
+uid = 123;
+// uid = false
+// sandbox.ts:59:1 - error TS2322: Type 'boolean' is not assignable to
+// type 'string | number'.
+// 59 uid = false
+//objects
+var ninjaTwo;
+ninjaTwo = { name: 'Ganesh', age: 30 };
+// ninjaTwo = 'hello'
+// sandbox.ts:68:1 - error TS2322: Type 'string' is not assignable to type 'object'.
+// 68 ninjaTwo = 'hello'
+var ninjaThree;
+// ninjaThree = {}
+// sandbox.ts:79:1 - error TS2739: Type '{}' is missing the following properties from type '{ name: string; age: number; beltColor: string; }': name, age, beltColor
+// 79 ninjaThree = {}
+ninjaThree = { name: 'mario', age: 20, beltColor: 'black' };
+// ninjaThree = {name:'mario',age:20,beltColor:'black',game:'hello'}
+// sandbox.ts:85:53 - error TS2322: Type '{ name: string; age: number; 
+// beltColor: string; game: string; }' is not assignable to type '{ name: string; age: number; beltColor: string; }'.
+//   Object literal may only specify known properties, and 'game' does 
+// not exist in type '{ name: string; age: number; beltColor: string; }'.
+// 85 ninjaThree = {name:'mario',age:20,beltColor:'black',game:'hello'}
