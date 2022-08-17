@@ -1,7 +1,7 @@
 class Invoice {
-    client: string;
-    details: string;
-    amount: number;
+   readonly client: string;
+   private details: string;
+   public amount: number;
 
     constructor(c: string, d: string, a: number) {
         this.client = c;
@@ -10,6 +10,12 @@ class Invoice {
     }
 
     format() {
+        // invOne.client = 'Sanjay'
+// src/app.ts:13:16 - error TS2540: Cannot assign to 'client' because it 
+// is a read-only property.
+
+// 13         invOne.client = 'Sanjay'
+     
         return `${this.client} owes $${this.amount} for ${this.details}`
     }
 }
@@ -17,60 +23,28 @@ class Invoice {
 const invOne = new Invoice('Ganesh', 'work on the mario website', 250);
 const invTwo = new Invoice('Sanjay', 'work on the mario website', 300);
 
-console.log(invOne, invTwo)
-
 
 let invoices: Invoice[] = [];
-// invoices.push('hello')
-// src/app.ts:24:15 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'Invoice'.
-
-// 24 invoices.push('hello')
-//                  ~~~~~~~
 
 invoices.push(invOne)
 invoices.push(invTwo)
 
-invOne.client = 'Sanjay'
-invTwo.amount = 400
+// invoices.forEach(inv => {
+//     console.log(inv.client, inv.details, inv.amount, inv.format())
+// })
+// src/app.ts:39:33 - error TS2341: Property 'details' is private and only accessible within class 'Invoice'.
 
-console.log(invOne, invTwo)
+// 39     console.log(inv.client, inv.details, inv.amount, inv.format()) 
 
-console.log(invoices)
+invoices.forEach(inv => {
+    // invOne.client = 'Sanjay'
+//     src/app.ts:40:12 - error TS2540: Cannot assign to 'client' because it 
+// is a read-only property.
 
-const anchor = document.querySelector('a');
-
-
-console.log(anchor)
-// console.log(anchor.href)
-// src/app.ts:4:13 - error TS2531: Object is possibly 'null'.
-
-// 4 console.log(anchor.href)
-
-if (anchor) {
-    console.log(anchor.href)
-}
-
-const anchorOne = document.querySelector('a')!;
-console.log(anchorOne.href)
-
-
-const form = document.querySelector('form')!;
-const formOne = document.querySelector('.new-item-form')!;
-const formTwo = document.querySelector('.new-item-form') as HTMLFormElement;
-console.log(formTwo.children);
-
-// inputs
-const type = document.querySelector('#type') as HTMLSelectElement
-const typeTwo = document.querySelector('#tofrom') as HTMLInputElement
-const typeThree = document.querySelector('#details') as HTMLInputElement
-const typeFour = document.querySelector('#amount') as HTMLInputElement
-
-form.addEventListener('submit', (e: Event) => {
-    e.preventDefault()
-    console.log(
-        type.value,
-        typeTwo.value,
-        typeThree.value,
-        typeFour.valueAsNumber,
-    )
+// 40     invOne.client = 'Sanjay'
+    console.log(inv.client, inv.amount, inv.format())
 })
+
+
+
+

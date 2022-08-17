@@ -6,43 +6,27 @@ class Invoice {
         this.amount = a;
     }
     format() {
+        // invOne.client = 'Sanjay'
+        // src/app.ts:13:16 - error TS2540: Cannot assign to 'client' because it 
+        // is a read-only property.
+        // 13         invOne.client = 'Sanjay'
         return `${this.client} owes $${this.amount} for ${this.details}`;
     }
 }
 const invOne = new Invoice('Ganesh', 'work on the mario website', 250);
 const invTwo = new Invoice('Sanjay', 'work on the mario website', 300);
-console.log(invOne, invTwo);
 let invoices = [];
-// invoices.push('hello')
-// src/app.ts:24:15 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'Invoice'.
-// 24 invoices.push('hello')
-//                  ~~~~~~~
 invoices.push(invOne);
 invoices.push(invTwo);
-invOne.client = 'Sanjay';
-invTwo.amount = 400;
-console.log(invOne, invTwo);
-console.log(invoices);
-const anchor = document.querySelector('a');
-console.log(anchor);
-// console.log(anchor.href)
-// src/app.ts:4:13 - error TS2531: Object is possibly 'null'.
-// 4 console.log(anchor.href)
-if (anchor) {
-    console.log(anchor.href);
-}
-const anchorOne = document.querySelector('a');
-console.log(anchorOne.href);
-const form = document.querySelector('form');
-const formOne = document.querySelector('.new-item-form');
-const formTwo = document.querySelector('.new-item-form');
-console.log(formTwo.children);
-// inputs
-const type = document.querySelector('#type');
-const typeTwo = document.querySelector('#tofrom');
-const typeThree = document.querySelector('#details');
-const typeFour = document.querySelector('#amount');
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    console.log(type.value, typeTwo.value, typeThree.value, typeFour.valueAsNumber);
+// invoices.forEach(inv => {
+//     console.log(inv.client, inv.details, inv.amount, inv.format())
+// })
+// src/app.ts:39:33 - error TS2341: Property 'details' is private and only accessible within class 'Invoice'.
+// 39     console.log(inv.client, inv.details, inv.amount, inv.format()) 
+invoices.forEach(inv => {
+    // invOne.client = 'Sanjay'
+    //     src/app.ts:40:12 - error TS2540: Cannot assign to 'client' because it 
+    // is a read-only property.
+    // 40     invOne.client = 'Sanjay'
+    console.log(inv.client, inv.amount, inv.format());
 });
