@@ -1,21 +1,24 @@
 class Invoice {
-   readonly client: string;
-   private details: string;
-   public amount: number;
 
-    constructor(c: string, d: string, a: number) {
-        this.client = c;
-        this.details = d;
-        this.amount = a;
-    }
+    constructor(
+//            client: string,
+//            details: string,
+//         amount: number,
+           
+// src/app.ts:28:21 - error TS2339: Property 'client' does not exist on type 'Invoice'.
+
+// 28     console.log(inv.client, inv.amount, inv.format())
+//                        ~~~~~~
+
+// src/app.ts:28:33 - error TS2339: Property 'amount' does not exist on type 'Invoice'.
+
+// 28     console.log(inv.client, inv.amount, inv.format())
+          readonly client: string,
+          private details: string,
+          public amount: number,
+    ) { }
 
     format() {
-        // invOne.client = 'Sanjay'
-// src/app.ts:13:16 - error TS2540: Cannot assign to 'client' because it 
-// is a read-only property.
-
-// 13         invOne.client = 'Sanjay'
-     
         return `${this.client} owes $${this.amount} for ${this.details}`
     }
 }
@@ -29,19 +32,8 @@ let invoices: Invoice[] = [];
 invoices.push(invOne)
 invoices.push(invTwo)
 
-// invoices.forEach(inv => {
-//     console.log(inv.client, inv.details, inv.amount, inv.format())
-// })
-// src/app.ts:39:33 - error TS2341: Property 'details' is private and only accessible within class 'Invoice'.
-
-// 39     console.log(inv.client, inv.details, inv.amount, inv.format()) 
 
 invoices.forEach(inv => {
-    // invOne.client = 'Sanjay'
-//     src/app.ts:40:12 - error TS2540: Cannot assign to 'client' because it 
-// is a read-only property.
-
-// 40     invOne.client = 'Sanjay'
     console.log(inv.client, inv.amount, inv.format())
 })
 
