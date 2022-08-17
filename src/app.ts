@@ -1,4 +1,44 @@
+class Invoice {
+    client: string;
+    details: string;
+    amount: number;
+
+    constructor(c: string, d: string, a: number) {
+        this.client = c;
+        this.details = d;
+        this.amount = a;
+    }
+
+    format() {
+        return `${this.client} owes $${this.amount} for ${this.details}`
+    }
+}
+
+const invOne = new Invoice('Ganesh', 'work on the mario website', 250);
+const invTwo = new Invoice('Sanjay', 'work on the mario website', 300);
+
+console.log(invOne, invTwo)
+
+
+let invoices: Invoice[] = [];
+// invoices.push('hello')
+// src/app.ts:24:15 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'Invoice'.
+
+// 24 invoices.push('hello')
+//                  ~~~~~~~
+
+invoices.push(invOne)
+invoices.push(invTwo)
+
+invOne.client = 'Sanjay'
+invTwo.amount = 400
+
+console.log(invOne, invTwo)
+
+console.log(invoices)
+
 const anchor = document.querySelector('a');
+
 
 console.log(anchor)
 // console.log(anchor.href)
@@ -25,7 +65,7 @@ const typeTwo = document.querySelector('#tofrom') as HTMLInputElement
 const typeThree = document.querySelector('#details') as HTMLInputElement
 const typeFour = document.querySelector('#amount') as HTMLInputElement
 
-form.addEventListener('submit', (e:Event) => {
+form.addEventListener('submit', (e: Event) => {
     e.preventDefault()
     console.log(
         type.value,

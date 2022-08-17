@@ -1,4 +1,28 @@
 "use strict";
+class Invoice {
+    constructor(c, d, a) {
+        this.client = c;
+        this.details = d;
+        this.amount = a;
+    }
+    format() {
+        return `${this.client} owes $${this.amount} for ${this.details}`;
+    }
+}
+const invOne = new Invoice('Ganesh', 'work on the mario website', 250);
+const invTwo = new Invoice('Sanjay', 'work on the mario website', 300);
+console.log(invOne, invTwo);
+let invoices = [];
+// invoices.push('hello')
+// src/app.ts:24:15 - error TS2345: Argument of type 'string' is not assignable to parameter of type 'Invoice'.
+// 24 invoices.push('hello')
+//                  ~~~~~~~
+invoices.push(invOne);
+invoices.push(invTwo);
+invOne.client = 'Sanjay';
+invTwo.amount = 400;
+console.log(invOne, invTwo);
+console.log(invoices);
 const anchor = document.querySelector('a');
 console.log(anchor);
 // console.log(anchor.href)
