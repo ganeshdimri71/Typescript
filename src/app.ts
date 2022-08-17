@@ -1,41 +1,38 @@
-// Interfaces
+import { Invoice } from './classes/invoice.js'
+import { Payment } from './classes/payments.js'
+import {HasFormatter} from './interfaces/HasFormatter'
 
-interface IsPerson {
-    name: string,
-    age: number,
-    speak(a: string): void;
-    spend(a: number): number;
-}
+let docOne: HasFormatter;
+let docTwo: HasFormatter;
 
-// const me: IsPerson = {}
-// src/app.ts:10:7 - error TS2739: Type '{}' is missing the following properties from type 'IsPerson': name, age, speak, spend
+docOne = new Invoice('Ganesh', 'web work', 250)
+docTwo = new Payment('Sanjay', 'Plummber work', 200)
 
-// 10 const me: IsPerson = {}
+let docs: HasFormatter[] = []
+docs.push(docOne)
+docs.push(docTwo)
 
-const me: IsPerson = {
-    name: 'Ganesh',
-    age: 30,
-    speak(text: string): void {
-        console.log(text)
-    },
-    spend(amount: number): number {
-        console.log('I spend ', amount)
-        return amount
-    },
-//     skills: []
-//     src/app.ts:25:5 - error TS2322: Type '{ name: string; age: number; speak(text: string): void; spend(amount: number): number; skills: never[]; }' is not assignable to type 'IsPerson'.
-//   Object literal may only specify known properties, and 'skills' does 
-// not exist in type 'IsPerson'.
+console.log(docs)
 
-// 25     skills: []
-}
+const form = document.querySelector('form')!;
+const formOne = document.querySelector('.new-item-form')!;
+const formTwo = document.querySelector('.new-item-form') as HTMLFormElement;
+console.log(formTwo.children);
 
-const greetPerson = (person: IsPerson) => {
-    console.log('hello ', person.name )
-}
+// inputs
+const type = document.querySelector('#type') as HTMLSelectElement
+const typeTwo = document.querySelector('#tofrom') as HTMLInputElement
+const typeThree = document.querySelector('#details') as HTMLInputElement
+const typeFour = document.querySelector('#amount') as HTMLInputElement
 
-greetPerson(me)
+form.addEventListener('submit', (e: Event) => {
+    e.preventDefault()
 
-let someone: IsPerson;
-
-console.log(me)
+    let doc: HasFormatter;
+    if (type.value === 'invoice') {
+        doc = new Invoice(typeTwo.value, typeThree.value,  typeFour.valueAsNumber)
+    } else {
+        doc = new Payment(typeTwo.value, typeThree.value,  typeFour.valueAsNumber)
+    }
+    console.log( doc)
+})
