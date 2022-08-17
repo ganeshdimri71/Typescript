@@ -31,35 +31,25 @@ let docThree = addUIDTwo({name: 'Ganesh', age: 40})
 console.log(docThree.name)
 
 
-// with interfaces
+// enum
+
+enum ResourceType {BOOK, AUTHOR, FILM, DIRECTOR, PERSON}
 interface Resource<T>{
     uid: number;
-    resourceName: string;
+    resourceName: ResourceType;
     data: T; 
 }
 
-const docFour: Resource<string> = {
+const docFour: Resource<object> = {
     uid: 1,
-    resourceName: 'person',
-    data:  'Ganesh'
-    
+    resourceName: ResourceType.BOOK,
+    data: { name:'Ganesh'}
 }
 
-interface ResourceOne<T>{
-    uid: number;
-    resourceName: string;
-    data: T; 
-}
-
-const docFive: ResourceOne<object> = {
+const docFive: Resource<string[]>  = {
     uid: 1,
-    resourceName: 'person',
-    data: {name: 'Ganesh'}
-    
-}
-
-const docSix: Resource<string[]>  = {
-      uid: 1,
-    resourceName: 'shoppingList',
+    resourceName: ResourceType.PERSON,
     data: ['test', 'bread', 'milk']
 }
+
+console.log(docFour, docFive)
